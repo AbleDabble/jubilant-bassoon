@@ -1,0 +1,16 @@
+ranks = '23456789TJQKA'
+suits = 'cdhs'
+handDict = {}
+test = 0
+for i, rank in enumerate(ranks):
+    b = 1 << 16 + i
+    r = i << 8
+    p = primes[i]
+    for j, suit in enumerate(suits):
+        s = 2 ** j << 12
+        b = b | r | p | s
+        print(f"binary representation {bin(b)[2:]} length: {len(bin(b)[2:])}")
+        handDict[rank + suit] = b
+    #print(f"binary representation {bin(b)[2:]} length: {len(bin(b)[2:])}")
+with open('arrays/handDict.pkl', 'wb') as f:
+    pickle.dump(handDict, f, protocol=pickle.HIGHEST_PROTOCOL)
